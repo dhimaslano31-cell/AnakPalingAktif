@@ -1,0 +1,943 @@
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Platform Pembelajaran Bermakna | Analisis & Jadwal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <style>
+    /* Skema Warna: Deep Ocean & Citrus */
+    :root{
+      --bg: #E3F2FD; /* Pale Blue/Sky Background (Latar Belakang Ceria) */
+      --card: #FFFFFF; /* Pure White for Cards (Bersih) */
+      --muted: #455A64; /* Dark Grayish Blue Muted text/labels */
+      --text: #1A237E; /* Deep Indigo/Ocean Blue Text */
+      --accent: #FF7043; /* Vibrant Orange (Semangat - Kontras kuat) */
+      --accent2: #8BC34A; /* Lime Green Accent (Pertumbuhan/Kesuksesan) */
+      --warn: #FFB300; /* Amber Warning */
+      --bad: #E53935; /* Strong Red Error */
+      --image-url: url('https://placehold.co/100x100/FFFFFF/1A237E?text=FOCUS');
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: 'Inter', sans-serif;
+      color:var(--text);
+      line-height:1.5;
+      background-color: var(--bg);
+      position: relative;
+    }
+    /* Overlay Latar Belakang */
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        /* Subtle Blue/Green Gradient */
+        background:
+            linear-gradient(135deg, rgba(227, 242, 253, 0.95) 0%, rgba(200, 230, 201, 0.95) 100%);
+        z-index: -1;
+    }
+    header{
+      padding:18px 16px;
+      background:var(--card);
+      position:sticky;
+      top:0;
+      z-index:5;
+      border-bottom:3px solid var(--accent);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      background-image: var(--image-url);
+      background-size: 80px;
+      background-repeat: no-repeat;
+      background-position: calc(100% - 16px) center;
+    }
+    h1{margin:0 0 4px 0;font-size:24px; color: var(--text); font-weight: 700;}
+    h2{margin-top: 0; font-size: 20px; color: var(--text);}
+    .sub{color:var(--muted);font-size:14px; font-weight: 400;}
+    .wrap{max-width:980px;margin:24px auto;padding:0 14px}
+    .tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+    .tabbtn{
+      border:none;
+      padding:10px 16px;
+      background: #E0E0E0; /* Gray base */
+      color:var(--muted);
+      border-radius:12px;
+      cursor:pointer;
+      transition:all .15s ease;
+      font-weight: 600;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .tabbtn.active{
+        background:var(--accent);
+        color: #FFFFFF;
+        box-shadow: 0 4px 8px rgba(255, 112, 67, 0.4);
+        transform: translateY(-2px);
+    }
+    .tabbtn:hover:not(.active) {
+        background: #D0D0D0;
+    }
+    .tabbtn:active{transform:scale(.98)}
+    .card{
+      background:var(--card);
+      border:1px solid #E0E0E0;
+      border-radius:16px;
+      padding:20px;
+      margin-bottom:20px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* Shadow lebih kuat */
+
+      /* Gambar Animasi Soft di Card */
+      background-image: var(--image-url);
+      background-size: 100px;
+      background-repeat: no-repeat;
+      background-position: right 20px bottom 20px;
+      background-blend-mode: soft-light;
+      opacity: 0.99;
+    }
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+    .col{display:flex;flex-direction:column;gap:6px}
+    label{font-size:14px;color:var(--muted); font-weight: 600;}
+    input[type="text"],input[type="number"],select,textarea{
+      width:100%;
+      padding:12px;
+      border-radius:10px;
+      border:2px solid #B0BEC5; /* Border yang lebih jelas */
+      background:var(--card);
+      color:var(--text);
+      box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.08);
+      transition: border-color 0.2s;
+    }
+    input[type="text"]:focus,input[type="number"]:focus,select:focus,textarea:focus {
+        border-color: var(--accent);
+        outline: none;
+    }
+    textarea{min-height:90px;resize:vertical}
+    .btn{
+      background:var(--accent);
+      color:#FFFFFF;
+      border:none;
+      padding:12px 18px;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:700;
+      box-shadow: 0 4px 10px rgba(255, 112, 67, 0.4);
+      transition: all 0.1s ease-in-out;
+    }
+    .btn:hover{
+        background: #F4511E; /* Darker orange on hover */
+    }
+    .btn.alt{
+      background:var(--accent2);
+      color:#FFFFFF;
+      box-shadow: 0 4px 10px rgba(139, 195, 74, 0.4);
+    }
+    .btn.alt:hover{
+        background: #7CB342; /* Darker green on hover */
+    }
+    .btn.ghost{
+      background:transparent;
+      color:var(--muted);
+      border:2px solid #CFD8DC;
+      font-weight:600;
+      box-shadow: none;
+    }
+    .btn.ghost:hover{
+        background: #F5F5F5;
+        border-color: #B0BEC5;
+    }
+    .row{display:flex;gap:12px;flex-wrap:wrap; align-items: center;}
+    .kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+    .kpibox{
+      background:var(--card);
+      padding:16px;
+      border-radius:12px;
+      border:1px solid #B0BEC5;
+      text-align:center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+    .kpibox b{font-size:22px; color:var(--accent); display: block; margin: 4px 0;}
+    .tag{display:inline-block;padding:4px 10px;border-radius:999px;font-size:12px;font-weight: 700; border:1px solid; color: var(--text); background: #FFF;}
+    .ok{color:#FFFFFF; background:var(--accent2); border-color: #689F38;} /* Green */
+    .mid{color:#1A1A1A; background:var(--warn); border-color: #FF8F00;} /* Yellow */
+    .bad{color:#FFFFFF; background:var(--bad); border-color: #B71C1C;} /* Red */
+    .list{margin:10px 0 0 20px; padding: 0;}
+    .list li{margin:6px 0}
+    .hide{display:none}
+    .hr{height:1px;background:#CFD8DC;margin:16px 0}
+    .pill{
+        padding:6px 12px;
+        border-radius:999px;
+        background:var(--text);
+        color: #FFFFFF;
+        font-size:13px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+    }
+    .mini{font-size:13px;color:var(--muted)}
+    .table{width:100%;border-collapse:separate;border-spacing:0;margin-top:12px; border-radius:10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);}
+    .table th,.table td{padding:12px;text-align:left; border: none;}
+    .table th{background:var(--text); color: #FFFFFF; font-weight: 700;}
+    .table td{background:var(--card); border-bottom: 1px solid #CFD8DC;}
+    .table tr:last-child td{border-bottom: none;}
+
+    /* Style khusus Tes IQ */
+    .soal-box {
+        background: #F5F5F5;
+        padding: 15px;
+        border-radius: 12px;
+        border-left: 5px solid var(--accent);
+        margin-bottom: 15px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    }
+    .soal-box label {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--text);
+        font-size: 15px;
+        font-weight: 600;
+    }
+    blockquote {
+        border-left: 5px solid var(--accent2);
+        padding-left: 15px;
+        margin: 15px 0;
+        font-style: italic;
+        color: var(--muted);
+        background: #F0F4C3; /* Pale Green/Yellow for emphasis */
+        padding: 15px;
+        border-radius: 8px;
+    }
+
+    footer{color:var(--muted);text-align:center;padding:20px; font-size: 13px;}
+    @media(max-width:760px){
+      .grid,.grid3{grid-template-columns:1fr}
+      .kpi{grid-template-columns:1fr 1fr}
+      /* Hilangkan gambar di header pada mode mobile */
+      header{
+        background-image: none !important;
+      }
+    }
+
+  </style>
+</head>
+<body><header>
+  <h1>Platform Pembelajaran Bermakna</h1>
+  <div class="sub">Analisis kebiasaan, rekomendasi gaya belajar, dan pembuat jadwal pintar</div>
+</header><div class="wrap">
+  <div class="tabs">
+    <button class="tabbtn active" data-tab="analyzer">1. Analisis Kebiasaan</button>
+    <button class="tabbtn" data-tab="schedule">2. Pembuat Jadwal</button>
+    <button class="tabbtn" data-tab="tools">3. Perangkat & Saran</button>
+    <button class="tabbtn" data-tab="iq">4. Tes IQ</button>
+    <button class="tabbtn" data-tab="about">Tentang Proyek</button>
+  </div>      <section id="analyzer" class="card">
+    <h2>Penganalisis Kebiasaan Belajar</h2>
+    <div class="mini">Isi cepat. Hasil langsung muncul. Data tersimpan di perangkat kamu.</div>
+    <div class="hr"></div><div class="grid">
+  <div class="col">
+    <label>Jam tidur rata-rata kamu</label>
+    <select id="sleep">
+      <option value="5">Kurang dari 6 jam</option>
+      <option value="10">6 sampai 7 jam</option>
+      <option value="15">7 sampai 8 jam</option>
+      <option value="10">Lebih dari 8 jam</option>
+    </select>
+  </div>
+  <div class="col">
+    <label>Durasi belajar fokus per hari</label>
+    <select id="focus">
+      <option value="5">0 sampai 20 menit</option>
+      <option value="10">20 sampai 45 menit</option>
+      <option value="15">45 sampai 90 menit</option>
+      <option value="12">Di atas 90 menit</option>
+    </select>
+  </div>
+  <div class="col">
+    <label>Gangguan HP saat belajar</label>
+    <select id="hp">
+      <option value="0">Sering sekali</option>
+      <option value="6">Kadang-kadang</option>
+      <option value="12">Jarang</option>
+      <option value="15">Hampir tidak pernah</option>
+    </select>
+  </div>
+  <div class="col">
+    <label>Kebiasaan membuat catatan</label>
+    <select id="notes">
+      <option value="0">Tidak pernah</option>
+      <option value="8">Kadang-kadang</option>
+      <option value="15">Rutin</option>
+    </select>
+  </div>
+  <div class="col">
+    <label>Review materi</label>
+    <select id="review">
+      <option value="0">Tidak pernah</option>
+      <option value="8">Seminggu sekali</option>
+      <option value="15">2 sampai 3 kali seminggu</option>
+    </select>
+  </div>
+  <div class="col">
+    <label>Preferensi gaya belajar</label>
+    <select id="style">
+      <option value="visual">Visual (Melihat)</option>
+      <option value="audio">Auditorik (Mendengar)</option>
+      <option value="kinestetik">Kinestetik (Bergerak/Praktik)</option>
+      <option value="campuran">Campuran</option>
+    </select>
+  </div>
+  <div class="col">
+    <label>Kondisi tempat belajar</label>
+    <select id="env">
+      <option value="0">Bising</option>
+      <option value="8">Cukup tenang</option>
+      <option value="12">Tenang</option>
+    </select>
+  </div>
+  <div class="col">
+    <label>Kendala utama kamu</label>
+    <select id="obstacle">
+      <option value="waktu">Manajemen waktu</option>
+      <option value="materi">Materi sulit</option>
+      <option value="motivasi">Motivasi turun</option>
+      <option value="cemas">Cemas ujian</option>
+    </select>
+  </div>
+</div>  <div class="row" style="margin-top:20px">
+  <button class="btn" onclick="analisis()">Analisis Sekarang</button>
+  <button class="btn alt" onclick="simpanAnalyzer()">Simpan</button>
+  <button class="btn ghost" onclick="resetAnalyzer()">Reset</button>
+  <button class="btn" style="background:var(--warn); color:var(--text); box-shadow: 0 4px 10px rgba(255, 179, 0, 0.4);" onclick="unduhHasil('hasilAnalyzer', 'Hasil_Analisis_Kebiasaan.png')">⬇️ Unduh Hasil (PNG)</button>
+</div>  <div id="hasilAnalyzer" style="margin-top:20px"></div>    </section>      <section id="schedule" class="card hide">
+    <h2>Pembuat Jadwal Pintar</h2>
+    <div class="mini">Masukkan mata pelajaran, tingkat kesulitan, dan waktu yang tersedia. Jadwal dibuat otomatis.</div>
+    <div class="hr"></div><div class="grid">
+  <div class="col">
+    <label>Waktu belajar hari ini (menit)</label>
+    <input id="totalTime" type="number" min="15" step="5" value="90">
+  </div>
+  <div class="col">
+    <label>Durasi 1 sesi belajar</label>
+    <select id="block">
+      <option value="25">25 menit belajar + 5 menit istirahat</option>
+      <option value="40">40 menit belajar + 10 menit istirahat</option>
+    </select>
+  </div>
+</div>  <div class="hr"></div>
+<div class="row">
+  <span class="pill">Daftar Mata Pelajaran</span>
+  <button class="btn alt" onclick="tambahMapel()">Tambah Baris</button>
+  <button class="btn ghost" onclick="hapusSemuaMapel()">Hapus Semua</button>
+</div>  <table id="mapelTable" class="table">
+  <thead>
+    <tr>
+      <th>Mata Pelajaran</th>
+      <th>Skor Kesulitan (1-5)</th>
+      <th>Target Materi</th>
+      <th>Hapus</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>  <div class="row" style="margin-top:20px">
+  <button class="btn" onclick="buatJadwal()">Buat Jadwal</button>
+  <button class="btn alt" onclick="simpanSchedule()">Simpan</button>
+  <button class="btn ghost" onclick="resetSchedule()">Reset</button>
+  <button class="btn" style="background:var(--warn); color:var(--text); box-shadow: 0 4px 10px rgba(255, 179, 0, 0.4);" onclick="unduhHasil('hasilJadwal', 'Jadwal_Pintar.png')">⬇️ Unduh Jadwal (PNG)</button>
+</div>  <div id="hasilJadwal" style="margin-top:20px"></div>    </section>      <section id="tools" class="card hide">
+    <h2>Perangkat & Saran Cepat</h2>
+    <div class="grid">
+      <div class="col">
+        <label>Cek gaya belajar cepat</label>
+        <select id="quickStyle">
+          <option value="visual">Visual (Melihat)</option>
+          <option value="audio">Auditorik (Mendengar)</option>
+          <option value="kinestetik">Kinestetik (Bergerak/Praktik)</option>
+          <option value="campuran">Campuran</option>
+        </select>
+        <button class="btn alt" style="margin-top:8px" onclick="rekomendasiGaya()">Tampilkan Saran</button>
+      </div>
+      <div class="col">
+        <label>Target harian</label>
+        <input id="targetHari" type="text" placeholder="Contoh: 3 latihan integral, merangkum 2 halaman">
+        <button class="btn" style="margin-top:8px" onclick="buatLangkah()">Buat 5 Langkah Aksi</button>
+      </div>
+    </div>
+    <div class="row" style="margin-top:20px">
+        <button class="btn" style="background:var(--warn); color:var(--text); box-shadow: 0 4px 10px rgba(255, 179, 0, 0.4);" onclick="unduhHasil('hasilTools', 'Hasil_Perangkat_Saran.png')">⬇️ Unduh Hasil (PNG)</button>
+    </div>
+    <div id="hasilTools" style="margin-top:20px"></div>
+  </section>      <section id="iq" class="card hide">
+    <h2>Simulasi Tes IQ (40 Soal)</h2>
+    <div class="mini">Tes simulasi ini mengukur kemampuan Logika, Numerik, dan Verbal. Gunakan fokus penuh. Hasil skor menggunakan formula skala standar (rerata 100, SD 15).</div>
+    <div class="hr"></div>  <div id="soalIQ">
+    <div class="grid">
+        <div class="col">
+            <h3>Numerik & Logika (1-20)</h3>
+            <div class="soal-box"><label>1. Tentukan angka selanjutnya: 7, 10, 14, 19, ?</label><input type="number" id="q1" placeholder="Angka"></div>
+            <div class="soal-box"><label>2. Tentukan angka selanjutnya: 80, 40, 20, 10, ?</label><input type="number" id="q2" placeholder="Angka"></div>
+            <div class="soal-box"><label>3. Tentukan angka selanjutnya: 1, 4, 9, 16, ?</label><input type="number" id="q3" placeholder="Angka"></div>
+            <div class="soal-box"><label>4. Tentukan angka selanjutnya: 2, 6, 18, 54, ?</label><input type="number" id="q4" placeholder="Angka"></div>
+            <div class="soal-box"><label>5. Tentukan angka selanjutnya: 1, 1, 2, 3, 5, 8, ?</label><input type="number" id="q5" placeholder="Angka"></div>
+            <div class="soal-box"><label>6. Berapa 2/5 dari 300?</label><input type="number" id="q6" placeholder="Angka"></div>
+            <div class="soal-box"><label>7. Jika 5 lusin buku berharga Rp600.000, berapa harga 1 buku?</label><input type="number" id="q7" placeholder="Angka (Rp)"></div>
+            <div class="soal-box"><label>8. 10 jam setelah pukul 15.00 adalah pukul?</label><input type="number" id="q8" placeholder="Angka (jam)"></div>
+            <div class="soal-box"><label>9. Jika hari ini Rabu, 100 hari lagi adalah hari?</label><input type="text" id="q9" placeholder="Hari"></div>
+            <div class="soal-box"><label>10. Mana yang berbeda: 49, 64, 81, 101?</label><input type="number" id="q10" placeholder="Angka"></div>
+            <div class="soal-box"><label>11. Kertas : Pena :: Papan Tulis : ?</label><input type="text" id="q11" placeholder="Kata"></div>
+            <div class="soal-box"><label>12. Dokter : Stetoskop :: Tukang Kayu : ?</label><input type="text" id="q12" placeholder="Kata"></div>
+            <div class="soal-box"><label>13. Mana yang tidak termasuk: Air, Susu, Teh, Roti?</label><input type="text" id="q13" placeholder="Kata"></div>
+            <div class="soal-box"><label>14. Lawan dari kata 'Pasif' adalah?</label><input type="text" id="q14" placeholder="Kata"></div>
+            <div class="soal-box"><label>15. Sinonim dari 'Akselerasi' adalah?</label><input type="text" id="q15" placeholder="Kata"></div>
+            <div class="soal-box"><label>16. Kebalikan dari 'Defisit' adalah?</label><input type="text" id="q16" placeholder="Kata"></div>
+            <div class="soal-box"><label>17. Jika 3 x 5 = 15, dan 4 x 6 = 24, maka 9 x 7 = ?</label><input type="number" id="q17" placeholder="Angka"></div>
+            <div class="soal-box"><label>18. A = 1, D = 4, G = 7, J = 10, M = ?</label><input type="number" id="q18" placeholder="Angka"></div>
+            <div class="soal-box"><label>19. Jika Kopi : Kafein, maka Teh : ?</label><input type="text" id="q19" placeholder="Kata"></div>
+            <div class="soal-box"><label>20. Tiga pekerja membangun 3 rumah dalam 3 hari. Berapa hari yang dibutuhkan 1 pekerja membangun 1 rumah?</label><input type="number" id="q20" placeholder="Angka (hari)"></div>
+        </div>
+
+        <div class="col">
+            <h3>Verbal & Analitis (21-40)</h3>
+            <div class="soal-box"><label>21. Sinonim dari 'Absurd' adalah?</label><input type="text" id="q21" placeholder="Kata"></div>
+            <div class="soal-box"><label>22. Antonim dari 'Permanen' adalah?</label><input type="text" id="q22" placeholder="Kata"></div>
+            <div class="soal-box"><label>23. Sinonim dari 'Jemawa' adalah?</label><input type="text" id="q23" placeholder="Kata"></div>
+            <div class="soal-box"><label>24. Antonim dari 'Konvergen' adalah?</label><input type="text" id="q24" placeholder="Kata"></div>
+            <div class="soal-box"><label>25. Sinonim dari 'Niskala' adalah?</label><input type="text" id="q25" placeholder="Kata"></div>
+            <div class="soal-box"><label>26. Mobil : Garasi :: Kapal : ?</label><input type="text" id="q26" placeholder="Kata"></div>
+            <div class="soal-box"><label>27. Ayah : Anak :: Kakek : ?</label><input type="text" id="q27" placeholder="Kata"></div>
+            <div class="soal-box"><label>28. Panas : Suhu :: Volume : ?</label><input type="text" id="q28" placeholder="Kata"></div>
+            <div class="soal-box"><label>29. Pukul : Jam :: Ukur : ?</label><input type="text" id="q29" placeholder="Kata"></div>
+            <div class="soal-box"><label>30. Hujan : Banjir :: Api : ?</label><input type="text" id="q30" placeholder="Kata"></div>
+            <div class="soal-box"><label>31. Tentukan angka yang hilang: 18, 15, 12, 9, ?</label><input type="number" id="q31" placeholder="Angka"></div>
+            <div class="soal-box"><label>32. Jika 4 kg beras berharga Rp60.000, berapa harga 7 kg beras?</label><input type="number" id="q32" placeholder="Angka (Rp)"></div>
+            <div class="soal-box"><label>33. Berapa hasil dari 1/2 + 1/4 + 1/8?</label><input type="text" id="q33" placeholder="Pecahan (cth: 7/8)"></div>
+            <div class="soal-box"><label>34. Jika semua Bunga adalah Merah, dan semua Merah adalah Besar, apakah semua Bunga adalah Besar? (Ya/Tidak)</label><input type="text" id="q34" placeholder="Ya/Tidak"></div>
+            <div class="soal-box"><label>35. Jika Anton lebih tinggi dari Budi, dan Budi lebih tinggi dari Candra, siapakah yang paling tinggi?</label><input type="text" id="q35" placeholder="Nama"></div>
+            <div class="soal-box"><label>36. Tentukan huruf selanjutnya: A, D, G, J, ?</label><input type="text" id="q36" placeholder="Huruf"></div>
+            <div class="soal-box"><label>37. Mana yang berbeda: Jakarta, London, Paris, Bandung?</label><input type="text" id="q37" placeholder="Kata"></div>
+            <div class="soal-box"><label>38. Lawan kata 'Eksklusif' adalah?</label><input type="text" id="q38" placeholder="Kata"></div>
+            <div class="soal-box"><label>39. Jika 20% dari X adalah 100, berapakah X?</label><input type="number" id="q39" placeholder="Angka"></div>
+            <div class="soal-box"><label>40. Jika 1 hari setara 24 jam, berapa jam dalam 3 hari?</label><input type="number" id="q40" placeholder="Angka (jam)"></div>
+        </div>
+    </div>
+</div>
+
+<div class="row" style="margin-top:20px">
+    <button class="btn" onclick="analisisIQ()">Analisis Skor IQ</button>
+    <button class="btn ghost" onclick="resetIQ()">Reset Tes</button>
+    <button class="btn" style="background:var(--warn); color:var(--text); box-shadow: 0 4px 10px rgba(255, 179, 0, 0.4);" onclick="unduhHasil('hasilIQ', 'Hasil_Simulasi_IQ.png')">⬇️ Unduh Hasil (PNG)</button>
+</div>
+
+<div id="hasilIQ" style="margin-top:20px"></div>
+
+  </section>    <section id="about" class="card hide">
+    <h2>Tentang Proyek</h2>
+    <p>Tujuan kamu jelas. Membuat pembelajaran menjadi bermakna, terarah, dan mudah diakses. Solusi ini berjalan offline di satu file HTML sehingga hemat kuota dan mudah dipakai di HP.</p>
+    <ul class="list">
+      <li>Penganalisis mengukur manajemen waktu, fokus, kebiasaan belajar, dan lingkungan.</li>
+      <li>Pembuat Jadwal menyusun jadwal berdasarkan kesulitan mata pelajaran dan waktu nyata.</li>
+      <li>Perangkat & Saran memberi rekomendasi gaya belajar dan langkah kecil yang bisa langsung dilakukan.</li>
+      <li>Tes IQ memberikan simulasi skor kecerdasan dasar dan rekomendasi karier.</li>
+      <li>Data disimpan lokal di peramban perangkat.</li>
+    </ul>
+    <div class="mini">Saran implementasi di sekolah. Pasang di Google Drive atau situs sekolah agar semua siswa dapat mengakses.</div>
+  </section>
+
+  <footer>© 2025 Pembelajaran Bermakna | Desain Warna Baru: Deep Ocean & Citrus</footer>
+</div>
+<script>
+  // Data Jawaban IQ (Kunci Jawaban)
+  const KUNCI_IQ = {
+      q1: 25, // +3, +4, +5, +6
+      q2: 5, // dibagi 2
+      q3: 25, // 5 kuadrat
+      q4: 162, // dikali 3
+      q5: 13, // Deret Fibonacci
+      q6: 120, // (300 / 5) * 2
+      q7: 10000, // 5 lusin = 60 buku. 600.000 / 60
+      q8: 1, // 15 + 10 = 25. 25-24 = 1
+      q9: 'jumat', // 100 / 7 = 14 sisa 2. Rabu + 2 hari = Jumat
+      q10: 101, // Semua kuadrat kecuali 101
+      q11: 'kapur', // atau spidol/penghapus
+      q12: 'gergaji', // atau palu
+      q13: 'roti', // Semua cairan
+      q14: 'aktif',
+      q15: 'percepatan', // atau peningkatan
+      q16: 'surplus', // atau untung
+      q17: 63, // perkalian biasa
+      q18: 13, // M=13
+      q19: 'tein', // atau thein, theophylline
+      q20: 3, // 1 pekerja 1 rumah dalam 3 hari (rasio tetap)
+      q21: 'mustahil', // atau janggal/konyol
+  q22: 'sementara', // atau temporer
+  q23: 'sombong', // atau angkuh
+  q24: 'divergen',
+  q25: 'abstrak', // atau takberwujud
+  q26: 'dermaga', // atau pelabuhan
+  q27: 'cucu',
+  q28: 'termometer', // atau derajat
+  q29: 'meteran', // atau penggaris
+  q30: 'kebakaran', // atau panas
+  q31: 6, // dikurangi 3
+  q32: 105000, // 60000/4 * 7
+  q33: '7/8', // 4/8 + 2/8 + 1/8
+  q34: 'ya', // Logika silogisme
+  q35: 'anton',
+  q36: 'm', // +3 huruf
+  q37: 'bandung', // Semua ibu kota negara kecuali Bandung
+  q38: 'inklusif',
+  q39: 500, // 100 / 0.20
+  q40: 72 // 3 * 24
+
+};
+
+// Daftar Kata Motivasi
+const MOTIVASI_LIST = [
+"Fokus bukan pada kecepatan, tapi pada konsistensi. Konsistensi kecil akan menghasilkan momentum besar.",
+"Bukan kurangnya waktu yang kita miliki, tapi kurangnya kemampuan kita menggunakan waktu dengan baik.",
+"Kesalahan adalah bukti bahwa kamu telah mencoba. Anggap sebagai data, bukan kegagalan.",
+"Disiplin adalah menjembatani antara tujuan dan pencapaian.",
+"Jangan menunggu motivasi datang, jadilah aksimu yang menciptakan motivasi.",
+"Proses belajar adalah maraton, bukan sprint. Nikmati setiap langkahnya.",
+"Rahasia untuk maju adalah memulai. Rahasia untuk memulai adalah memecah tugas besar menjadi tugas kecil yang dapat dikelola.",
+"Perbaikan 1% setiap hari akan membawamu jauh dalam setahun. Jangan remehkan kekuatan kecil yang konsisten.",
+"Pikiranmu seperti air, ketika keruh sulit untuk dilihat. Ketika kamu membiarkannya tenang, jawaban menjadi jelas.",
+"Tunda kesenangan, nikmati prosesnya. Hasil akan mengikuti kualitas usahamu.",
+"Kerja keras mengalahkan bakat, ketika bakat tidak bekerja keras. Jadilah rajin.",
+"Kegagalan adalah kesempatan untuk memulai lagi dengan lebih cerdas. Jangan pernah menyerah.",
+"Hari ini adalah kesempatan untuk membangun hari esok yang kamu inginkan.",
+"Ubah 'saya tidak bisa' menjadi 'saya akan mencoba lagi'. Sikap adalah segalanya.",
+"Belajar adalah satu-satunya investasi yang tidak akan pernah mengecewakanmu."
+];
+
+// Navigasi Tab
+document.querySelectorAll(".tabbtn").forEach(b=>{
+b.addEventListener("click",()=>{
+document.querySelectorAll(".tabbtn").forEach(x=>x.classList.remove("active"));
+b.classList.add("active");
+const id=b.dataset.tab;
+document.querySelectorAll("section.card").forEach(s=>s.classList.add("hide"));
+document.getElementById(id).classList.remove("hide");
+});
+});
+
+// Helper kecil
+function badge(score){
+if(score>=80){return "<span class='tag ok'>Kuat</span>"}
+if(score>=60){return "<span class='tag mid'>Cukup</span>"}
+return "<span class='tag bad'>Perlu Perbaikan</span>"
+}
+function simpanLS(key,val){try{localStorage.setItem(key,JSON.stringify(val))}catch(e){}}
+function ambilLS(key,def){try{const v=localStorage.getItem(key);return v?JSON.parse(v):def}catch(e){return def}}
+function getRandomMotivasi() {
+return MOTIVASI_LIST[Math.floor(Math.random() * MOTIVASI_LIST.length)];
+}
+
+// FUNGSI UNDUH HASIL (PNG)
+function unduhHasil(elementId, filename) {
+const input = document.getElementById(elementId);
+if (!input || input.innerHTML.trim() === "" || input.classList.contains('hide')) {
+// Menampilkan pesan error UI sederhana (menggantikan alert)
+const display = input ? input.closest('.card') : document.body;
+const msg = document.createElement('div');
+msg.innerHTML = '<div style="background:var(--bad); color:#fff; padding:10px; border-radius:5px; margin-bottom:10px; font-weight: 600;">Mohon isi dan jalankan analisis/buat jadwal/tes terlebih dahulu.</div>';
+display.parentNode.insertBefore(msg, display.nextSibling);
+setTimeout(() => msg.remove(), 3000);
+return;
+}
+
+// Capture the entire card content
+const elementToCapture = input.closest('.card');
+
+if (!elementToCapture) {
+    console.error("Elemen kartu untuk di-capture tidak ditemukan.");
+    return;
+}
+
+// Konfigurasi html2canvas dengan properti CORS dan background color dari card
+html2canvas(elementToCapture, {
+  scale: 2,
+  backgroundColor: getComputedStyle(elementToCapture).backgroundColor,
+  useCORS: true
+}).then(function(canvas) {
+  try {
+    const link = document.createElement('a');
+    link.download = filename;
+    // Gunakan toDataURL() dari canvas untuk membuat link download
+    link.href = canvas.toDataURL('image/png');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  } catch (e) {
+    console.error("Gagal membuat atau mengunduh gambar: ", e);
+    const errorMsg = document.createElement('div');
+    errorMsg.innerHTML = '<div style="background:var(--bad); color:#fff; padding:10px; border-radius:5px; margin-bottom:10px;">Gagal mengunduh. Coba pastikan semua konten sudah dimuat.</div>';
+    input.parentNode.insertBefore(errorMsg, input.nextSibling);
+    setTimeout(() => errorMsg.remove(), 4000);
+  }
+});
+
+}
+
+// ANALYZER
+function analisis(){
+const s=parseInt(document.getElementById("sleep").value,10);
+const f=parseInt(document.getElementById("focus").value,10);
+const hp=parseInt(document.getElementById("hp").value,10);
+const n=parseInt(document.getElementById("notes").value,10);
+const r=parseInt(document.getElementById("review").value,10);
+const env=parseInt(document.getElementById("env").value,10);
+const style=document.getElementById("style").value;
+const obstacle=document.getElementById("obstacle").value;
+
+const timeScore=Math.min(100,(s+f+r)*3);
+const focusScore=Math.min(100,(f+hp+env)*3);
+const habitScore=Math.min(100,(n+r+hp)*3);
+const wellbeingScore=Math.min(100,(s+env+f)*3);
+
+const motivasi = getRandomMotivasi();
+
+const hasil=document.getElementById("hasilAnalyzer");
+hasil.innerHTML=
+  "<div class='kpi'>"+
+    "<div class='kpibox' style='border-left: 5px solid var(--accent);'><div>Manajemen Waktu</div><b>"+timeScore+"</b><div>"+badge(timeScore)+"</div></div>"+
+    "<div class='kpibox' style='border-left: 5px solid var(--accent2);'><div>Fokus</div><b>"+focusScore+"</b><div>"+badge(focusScore)+"</div></div>"+
+    "<div class='kpibox' style='border-left: 5px solid var(--warn);'><div>Kebiasaan</div><b>"+habitScore+"</b><div>"+badge(habitScore)+"</div></div>"+
+    "<div class='kpibox' style='border-left: 5px solid var(--text);'><div>Kesejahteraan Diri</div><b>"+wellbeingScore+"</b><div>"+badge(wellbeingScore)+"</div></div>"+
+  "</div>"+
+  "<div class='hr'></div>"+
+  saranAnalyzer(style,obstacle,timeScore,focusScore,habitScore,wellbeingScore, motivasi);
+
+simpanAnalyzer();
+
+}
+
+function saranAnalyzer(style,obs,t,f,h,w, motivasi){
+let tips=[];
+if(t<60){tips.push("Buat blok belajar 25 menit (Teknik Pomodoro). Set 3 blok per hari.");tips.push("Susun daftar 3 prioritas pagi hari untuk mengatasi penundaan.");}
+if(f<60){tips.push("Matikan notifikasi dan gunakan mode pesawat saat belajar (Durasi minimal 45 menit).");tips.push("Belajar di tempat yang sama dan rapi agar otak cepat fokus.");}
+if(h<60){tips.push("Tulis catatan ringkas 5 baris per materi (Cornell Note-taking).");tips.push("Review 2 kali seminggu menggunakan Active Recall agar materi melekat.");}
+if(w<60){tips.push("Tidur 7 sampai 8 jam. Hindari layar biru 30 menit sebelum tidur.");}
+if(obs==="materi"){tips.push("Gunakan format pertanyaan 'Apa, Bagaimana, Kenapa' dan jawab dengan bahasa kamu sendiri.");}
+if(obs==="waktu"){tips.push("Gunakan aturan 2 menit. Kerjakan tugas yang bisa selesai di bawah 2 menit sekarang.");}
+if(obs==="motivasi"){tips.push("Mulai 5 menit saja. Menciptakan momentum lebih penting daripada menanti mood.");}
+if(obs==="cemas"){tips.push("Latihan napas 4-4-4 (Tarik 4 detik, Tahan 4 detik, Hembus 4 detik) sebelum ujian.");}
+
+let gaya = rekomendasiByStyle(style);
+const html=
+  "<div><span class='pill' style='background: var(--accent);'>Gaya Belajar</span> "+document.getElementById("style").options[document.getElementById("style").selectedIndex].text+"</div>"+
+  "<ul class='list'>"+gaya.map(x=>"<li>"+x+"</li>").join("")+"</ul>"+
+  "<div class='hr'></div>"+
+  "<div><span class='pill' style='background: var(--accent2);'>Kata Motivasi Hari Ini</span></div>"+
+  "<blockquote>"+motivasi+"</blockquote>"+
+  "<div class='hr'></div>"+
+  "<div><span class='pill' style='background: var(--accent);'>Saran Spesifik</span></div>"+
+  "<ul class='list'>"+tips.map(x=>"<li>"+x+"</li>").join("")+"</ul>";
+return html;
+
+}
+
+function rekomendasiByStyle(style){
+if(style==="visual"){
+return ["Gunakan warna, stabilo, dan kode warna untuk menandai kata kunci.","Buat peta konsep 1 halaman per topik (Mind Map).","Tonton ringkasan video animasi lalu tulis ulang dengan kata kamu."];
+}
+if(style==="audio"){
+return ["Rekam penjelasan materi diri kamu sendiri (60-90 detik per topik) dan dengarkan ulang.", "Belajar sambil menjelaskan materi ke teman atau berbicara sendiri.","Gunakan musik instrumental untuk fokus."];
+}
+if(style==="kinestetik"){
+return ["Belajar sambil praktek atau melakukan simulasi. Terapkan Active Recall dengan bergerak.", "Gunakan kartu kilas (flashcard) untuk bergerak sambil menghafal/menguji diri.","Jeda aktif. Berjalan 2 menit antar sesi belajar."];
+}
+return ["Campur visual (Mind Map) dan audio (Merekam suara).","Latihan soal pendek untuk memastikan pemahaman setelah setiap sesi gabungan."];
+}
+
+function simpanAnalyzer(){
+const data={
+sleep:document.getElementById("sleep").value, focus:document.getElementById("focus").value, hp:document.getElementById("hp").value,
+notes:document.getElementById("notes").value, review:document.getElementById("review").value, style:document.getElementById("style").value,
+env:document.getElementById("env").value, obstacle:document.getElementById("obstacle").value
+};
+simpanLS("analyzer-data",data);
+}
+function resetAnalyzer(){
+localStorage.removeItem("analyzer-data");
+document.querySelectorAll("#analyzer select").forEach(s=>s.selectedIndex=0);
+document.getElementById("hasilAnalyzer").innerHTML="";
+}
+(function muatAnalyzer(){
+const d=ambilLS("analyzer-data",null);
+if(!d){return}
+Object.keys(d).forEach(k=>{
+const el=document.getElementById(k);
+if(el){el.value=d[k]}
+});
+analisis();
+})();
+
+// SCHEDULE (Fungsi tetap sama seperti sebelumnya)
+function tambahMapel(nama="",skor=3,target=""){
+const tbody=document.querySelector("#mapelTable tbody");
+const tr=document.createElement("tr");
+tr.innerHTML=
+"<td><input type='text' value='"+nama+"' placeholder='Contoh: Matematika'></td>"+
+"<td><input type='number' min='1' max='5' value='"+skor+"'></td>"+
+"<td><input type='text' value='"+target+"' placeholder='Contoh: Latihan SPLTV 10 soal'></td>"+
+"<td><button class='btn ghost' onclick='this.closest(\"tr\").remove()'>Hapus</button></td>";
+tbody.appendChild(tr);
+}
+function hapusSemuaMapel(){
+document.querySelector("#mapelTable tbody").innerHTML="";
+}
+function resetSchedule(){
+document.getElementById("totalTime").value=90;
+document.getElementById("block").value=25;
+hapusSemuaMapel();
+document.getElementById("hasilJadwal").innerHTML="";
+localStorage.removeItem("schedule-data");
+}
+function simpanSchedule(){
+const rows=[...document.querySelectorAll("#mapelTable tbody tr")].map(tr=>{
+const tds=tr.querySelectorAll("td input");
+return {nama:tds[0].value,skor:parseInt(tds[1].value||3,10),target:tds[2].value};
+});
+const data={
+total:parseInt(document.getElementById("totalTime").value,10),
+block:parseInt(document.getElementById("block").value,10),
+rows
+};
+simpanLS("schedule-data",data);
+}
+(function muatSchedule(){
+const d=ambilLS("schedule-data",null);
+if(!d){
+tambahMapel("Matematika",4,"20 soal limit");
+tambahMapel("Bahasa Inggris",3,"Ringkas 2 teks");
+tambahMapel("Biologi",2,"Baca sel tumbuhan 2 halaman");
+return;
+}
+document.getElementById("totalTime").value=d.total;
+document.getElementById("block").value=d.block;
+hapusSemuaMapel();
+d.rows.forEach(r=>tambahMapel(r.nama,r.skor,r.target));
+})();
+
+function buatJadwal(){
+const total=parseInt(document.getElementById("totalTime").value,10);
+const block=parseInt(document.getElementById("block").value,10);
+if(!total||total<15){
+// NOTE: Mengganti alert() dengan UI sederhana
+const el = document.getElementById("hasilJadwal");
+el.innerHTML = '<div style="background:var(--bad); color:#fff; padding:10px; border-radius:5px; margin-bottom:10px;">Waktu belajar minimal 15 menit.</div>';
+setTimeout(()=>el.innerHTML='', 3000);
+return
+}
+const rows=[...document.querySelectorAll("#mapelTable tbody tr")].map(tr=>{
+const tds=tr.querySelectorAll("td input");
+return {nama:(tds[0].value||"Mapel"),skor:Math.min(5,Math.max(1,parseInt(tds[1].value||3,10))),target:tds[2].value||"-"};
+});
+if(rows.length===0){
+// NOTE: Mengganti alert() dengan UI sederhana
+const el = document.getElementById("hasilJadwal");
+el.innerHTML = '<div style="background:var(--bad); color:#fff; padding:10px; border-radius:5px; margin-bottom:10px;">Tambah minimal satu mata pelajaran.</div>';
+setTimeout(()=>el.innerHTML='', 3000);
+return
+}
+
+const totalSkor=rows.reduce((s,r)=>s+r.skor,0);
+const sesi=Math.floor(total/block);
+const durasiBelajar=block;
+
+rows.forEach(r=>{r.sesi=Math.max(1,Math.round((r.skor/totalSkor)*sesi));});
+
+let diff=sesi-rows.reduce((s,r)=>s+r.sesi,0);
+while(diff!==0){
+  if(diff>0){
+    rows.sort((a,b)=>b.skor-a.skor)[0].sesi+=1;diff-=1;
+  }else{
+    rows.sort((a,b)=>a.skor-b.skor)[0].sesi=Math.max(1,rows.sort((a,b)=>a.skor-b.skor)[0].sesi-1);diff+=1;
+  }
+}
+
+const list=[];
+let urut=[...rows].sort((a,b)=>b.skor-a.skor);
+while(list.length<sesi){
+  for(const r of urut){if(r.sesi>0){list.push(r.nama);r.sesi-=1;}}
+}
+
+let html="<div class='row'><span class='pill' style='background: var(--text);'>Total Waktu</span> <span style='font-weight: 700; color: var(--accent);'>"+total+"</span> menit <span class='pill' style='background: var(--text);'>Sesi</span> <span style='font-weight: 700; color: var(--accent);'>"+sesi+"</span> x <span style='font-weight: 700; color: var(--accent);'>"+durasiBelajar+"</span> menit</div>";
+html+="<table class='table'><thead><tr><th>Sesi</th><th>Mata Pelajaran</th><th>Durasi</th><th>Target</th></tr></thead><tbody>";
+const targetMap=new Map(rows.map(r=>[r.nama,r.target]));
+list.forEach((nama,i)=>{
+  const target=targetMap.get(nama)||"-";
+  html+="<tr><td>"+(i+1)+"</td><td>"+nama+"</td><td>"+durasiBelajar+" menit</td><td>"+target+"</td></tr>";
+});
+html+="</tbody></table>";
+
+html+="<div class='hr'></div><div><span class='pill' style='background: var(--accent);'>Panduan Eksekusi</span></div>";
+html+="<ul class='list'><li>Nyalakan pewaktu 25/5 (atau durasi yang kamu pilih) sesuai dengan sesi jadwal.</li><li>Istirahat 5 sampai 10 menit setiap selesai sesi.</li><li>Tandai sesi yang selesai. Jika tertunda, pindahkan ke akhir daftar.</li><li>Di akhir hari, ringkas 5 baris untuk tiap mata pelajaran.</li></ul>";
+
+document.getElementById("hasilJadwal").innerHTML=html;
+simpanSchedule();
+
+}
+
+// TOOLS
+function rekomendasiGaya(){
+const v=document.getElementById("quickStyle").value;
+const tips=rekomendasiByStyle(v);
+const html="<div class='row'><span class='pill' style='background: var(--accent2);'>Gaya</span> "+document.getElementById("quickStyle").options[document.getElementById("quickStyle").selectedIndex].text+"</div><ul class='list'>"+tips.map(x=>"<li>"+x+"</li>").join("")+"</ul>";
+document.getElementById("hasilTools").innerHTML=html;
+}
+function buatLangkah(){
+const t=(document.getElementById("targetHari").value||"Selesaikan 1 tugas utama").trim();
+const motivasi = getRandomMotivasi();
+const langkah=[
+"Siapkan meja belajar dan singkirkan HP. Ciptakan 'Zona Fokus'.",
+"Set pewaktu 25 menit. Fokus penuh pada target: "+t+".",
+"Istirahat 5 menit. Lakukan peregangan atau minum air.",
+"Ulangi 2 sesi lagi. Tandai kemajuan di setiap sesi.",
+"Ringkas 5 baris. Tuliskan satu hal yang kamu pelajari dan satu hal yang masih sulit."
+];
+const html="<div><span class='pill' style='background: var(--accent);'>Kata Motivasi</span></div><blockquote>"+motivasi+"</blockquote><div class='hr'></div><div class='row'><span class='pill' style='background: var(--accent2);'>Rencana 5 Langkah Aksi</span></div><ul class='list'>"+langkah.map(x=>"<li>"+x+"</li>").join("")+"</ul>";
+document.getElementById("hasilTools").innerHTML=html;
+}
+
+// TES IQ
+function cekJawaban(id, kunci) {
+const el = document.getElementById(id);
+if (!el || !el.value) return 0;
+
+const input = el.value;
+  const sanitizedKunci = String(kunci).toLowerCase().replace(/\s/g, '');
+
+  // Khusus untuk input number, cek nilai integer
+  if (el.type === 'number') {
+      // Q7 perlu penanganan khusus karena nilainya besar dan mungkin salah input
+      if (id === 'q7') return (parseInt(input, 10) === 10000) ? 1 : 0;
+      if (id === 'q32') return (parseInt(input, 10) === 105000) ? 1 : 0;
+      // Cek untuk semua number
+      return parseInt(input, 10) === kunci ? 1 : 0;
+  }
+
+  const sanitizedInput = String(input).toLowerCase().replace(/\s/g, '');
+
+  // Untuk teks, gunakan include untuk toleransi, dan cek ketepatan
+  if (id === 'q9') return (sanitizedInput.includes('jumat')) ? 1 : 0;
+  if (id === 'q11') return (sanitizedInput.includes('kapur') || sanitizedInput.includes('spidol')) ? 1 : 0;
+  if (id === 'q12') return (sanitizedInput.includes('gergaji') || sanitizedInput.includes('palu')) ? 1 : 0;
+  if (id === 'q13') return (sanitizedInput.includes('roti')) ? 1 : 0;
+  if (id === 'q14') return (sanitizedInput.includes('aktif')) ? 1 : 0;
+  if (id === 'q15') return (sanitizedInput.includes('percepatan') || sanitizedInput.includes('peningkatan')) ? 1 : 0;
+  if (id === 'q16') return (sanitizedInput.includes('surplus') || sanitizedInput.includes('untung')) ? 1 : 0;
+  if (id === 'q19') return (sanitizedInput.includes('tein') || sanitizedInput.includes('thein')) ? 1 : 0;
+  if (id === 'q22') return (sanitizedInput.includes('sementara') || sanitizedInput.includes('temporer')) ? 1 : 0;
+  if (id === 'q23') return (sanitizedInput.includes('sombong') || sanitizedInput.includes('angkuh')) ? 1 : 0;
+  if (id === 'q24') return (sanitizedInput.includes('divergen')) ? 1 : 0;
+  if (id === 'q25') return (sanitizedInput.includes('abstrak')) ? 1 : 0;
+  if (id === 'q33') return (sanitizedInput.includes('7/8')) ? 1 : 0;
+  if (id === 'q34') return (sanitizedInput.includes('ya')) ? 1 : 0;
+  if (id === 'q35') return (sanitizedInput.includes('anton')) ? 1 : 0;
+  if (id === 'q37') return (sanitizedInput.includes('bandung')) ? 1 : 0;
+  if (id === 'q38') return (sanitizedInput.includes('inklusif')) ? 1 : 0;
+
+  // Default: Cek kesamaan string secara ketat
+  return sanitizedInput === sanitizedKunci ? 1 : 0;
+
+}
+
+function analisisIQ() {
+let skorRaw = 0; // Maksimum 40
+const kunci = KUNCI_IQ;
+
+// Loop melalui 40 pertanyaan
+  for (let i = 1; i <= 40; i++) {
+      const id = 'q' + i;
+      skorRaw += cekJawaban(id, kunci[id]);
+  }
+
+  // FORMULA SCALING STANDAR (Simulasi Real)
+  // Skala IQ: Rerata 100, Simpangan Baku (SD) 15.
+  // Formula Linier: IQ = 70 + (Raw_Score * 1.875)
+  const iqScore = 70 + (skorRaw * 1.875);
+
+  // Bulatkan ke kelipatan 5 terdekat untuk tampilan yang 'rapi'
+  const finalIq = Math.max(70, Math.min(145, Math.round(iqScore / 5) * 5));
+
+  const level = getIQLevel(finalIq);
+
+  const hasil = document.getElementById("hasilIQ");
+  hasil.innerHTML =
+      "<div class='kpi'>" +
+          "<div class='kpibox' style='grid-column: span 4; background: var(--text); color: #fff; border: 1px solid var(--accent2);'><div>Skor IQ Simulasi</div><b>" + finalIq + "</b><div>" + level.status + "</div></div>" +
+      "</div>" +
+      "<div class='hr'></div>" +
+      saranIQ(finalIq);
+
+}
+
+function getIQLevel(score) {
+if (score >= 130) return { status: "Sangat Superior (Sangat Cerdas)", level: 5 };
+if (score >= 120) return { status: "Superior (Cerdas)", level: 4 };
+if (score >= 110) return { status: "Rata-rata Tinggi", level: 3 };
+if (score >= 90) return { status: "Rata-rata", level: 2 };
+if (score >= 80) return { status: "Rata-rata Rendah", level: 1 };
+return { status: "Perlu Perhatian Khusus", level: 0 };
+}
+
+function saranIQ(score) {
+const level = getIQLevel(score).level;
+let pekerjaan = [];
+let gayaBelajar = [];
+
+if (level === 5) {
+    gayaBelajar.push("Menguasai materi dengan membaca literatur kompleks, melakukan riset mandiri, dan proyek inovasi.");
+    pekerjaan = ["Arsitek Sistem AI/Machine Learning Engineer", "Data Scientist", "Konsultan Manajemen Strategis", "Peneliti Senior/Dosen Universitas"];
+} else if (level === 4) {
+    gayaBelajar.push("Aktif dalam diskusi, memecahkan studi kasus (case study), dan merancang solusi baru (Inquiry-Based Learning).");
+    pekerjaan = ["Manajer Proyek IT/Teknologi", "Insinyur (Minyak/Sipil/Elektro)", "Analis Keuangan & Investasi", "Dokter Spesialis/Hakim"];
+} else if (level === 3) {
+    gayaBelajar.push("Menggunakan peta pikiran, membuat ringkasan terstruktur, dan memperluas jaringan pengetahuan (Visual & Audio-Visual).");
+    pekerjaan = ["Guru/Pendidik Profesional", "Akuntan Publik/Auditor", "Manajer Pemasaran", "Pengembang Aplikasi (Developer)"];
+} else if (level === 2) {
+    gayaBelajar.push("Fokus pada penguasaan dasar melalui latihan praktik, mengajar teman, dan repetisi teratur.");
+    pekerjaan = ["Staf Administrasi & Keuangan", "Spesialis Penjualan (Sales)", "Teknisi Peralatan", "Wirausahawan UMKM", "Pekerja Terampil (Tukang Listrik/Las)"];
+} else { // Level 0 & 1
+    gayaBelajar.push("Prioritaskan keterampilan praktis, lingkungan belajar yang terstruktur, dan pendampingan intensif.");
+    pekerjaan = ["Asisten Administrasi", "Pekerja Jasa (Ritel/Restoran)", "Keterampilan Tangan (Boga/Menjahit)", "Pekerja Lapangan"];
+}
+
+const motivasi = (score >= 110)
+    ? "Kecerdasan adalah modal, tapi kerja keras dan fokus adalah mesinnya. Terus dorong batas kemampuanmu!"
+    : "Setiap individu unik. Fokus pada penguatan dasar-dasar dan kembangkan keahlian praktis yang kamu kuasai saat ini. Konsistensi adalah kunci."
+
+const html =
+  "<div><span class='pill' style='background: var(--accent2);'>Kata Motivasi</span></div>"+
+  "<blockquote>"+motivasi+"</blockquote>"+
+  "<div class='hr'></div>"+
+  "<div><span class='pill' style='background: var(--accent);'>Rekomendasi Gaya Belajar</span></div>" +
+  "<ul class='list'>" + gayaBelajar.map(x => "<li>" + x + "</li>").join("") + "</ul>" +
+  "<div class='hr'></div>" +
+  "<div><span class='pill' style='background: var(--accent2);'>Rekomendasi Pekerjaan di Indonesia (Simulasi)</span></div>" +
+  "<ul class='list'>" + pekerjaan.map(x => "<li>" + x + "</li>").join("") + "</ul>" +
+  "<div class='mini'>*Hasil skor ini merupakan simulasi berdasar formula skala standar (Mean 100, SD 15) dan tidak menggantikan tes psikotes klinis.</div>";
+
+return html;
+
+}
+
+function resetIQ() {
+document.querySelectorAll("#soalIQ input").forEach(i => i.value = '');
+document.getElementById("hasilIQ").innerHTML = "";
+}
+
+// Inisiasi awal
+(function(){
+    // Muat data yang tersimpan saat pertama kali aplikasi dibuka
+    muatAnalyzer();
+    muatSchedule();
+    // Hilangkan gambar di header pada mode mobile (sudah ada di CSS, tapi jaga-jaga)
+    if(window.innerWidth <= 760) {
+        document.querySelector('header').style.backgroundImage = 'none';
+    }
+})();
+</script></body>
+</html>
